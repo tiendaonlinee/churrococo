@@ -643,10 +643,10 @@
       catalogEl.innerHTML = '';
 
       const categories = [
-        { id: 'simples', title: '🥖 Churros Simples (Sin relleno)' },
-        { id: 'rellenos', title: '🍯 Churros Rellenos (Combinables)' },
-        { id: 'banados', title: '🍫 Churros Bañados en Chocolate' },
-        { id: 'salados', title: '🧂 Churros Salados & Salsas' }
+        { id: 'simples', title: ' Churros Simples (Sin relleno)' },
+        { id: 'rellenos', title: ' Churros Rellenos (Combinables)' },
+        { id: 'banados', title: ' Churros Bañados en Chocolate' },
+        { id: 'salados', title: ' Churros Salados & Salsas' }
       ];
 
       categories.forEach(cat => {
@@ -950,7 +950,7 @@
         orderDetails += `• ${item.qty}x ${item.name}${detailsStr} — $${itemTotal.toLocaleString('es-AR')}\n`;
       }
 
-      let message = `¡Hola *Churros Coco*! 🥖😋\nQuisiera realizar el siguiente pedido para *DELIVERY*:\n\n`;
+      let message = `¡Hola *Churros Coco*! \nQuisiera realizar el siguiente pedido para *DELIVERY*:\n\n`;
       message += `🛒 *DETALLE DEL PEDIDO:*\n${orderDetails}\n`;
       message += `💰 *TOTAL ESTIMADO:* $${totalPrice.toLocaleString('es-AR')}\n\n`;
       message += `🛵 *DATOS PARA EL ENVÍO:*\n`;
