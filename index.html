@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Churros Coco — Concepción del Uruguay</title>
+  <title>Churros Coco — Delivery Concepción del Uruguay</title>
   <!-- Google Fonts & Font Awesome Icons -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -509,7 +509,7 @@
   <section class="hero">
     <img src="logo.png" alt="Churros Coco Logo" class="hero-logo" onerror="this.src='https://via.placeholder.com/240/FFC107/FF8C00?text=Churros+Coco'">
     <h1 class="store-title">CHURROS COCO</h1>
-    <p class="store-subtitle">📍 Posadas 896 — Concepción del Uruguay</p>
+    <p class="store-subtitle">🛵 Envíos a Domicilio — Concepción del Uruguay</p>
     <div class="store-status">
       <span class="status-dot status-open"></span>
       <span>Martes a Domingo: 13:00 a 20:30 hs (Lunes cerrado)</span>
@@ -550,7 +550,7 @@
         <span>TOTAL:</span>
         <span id="sidebarTotal" style="color:var(--brand-orange);">$0</span>
       </div>
-      <button class="btn-checkout-wa" onclick="openOrderModal()"><i class="fa-brands fa-whatsapp"></i> Enviar Pedido por WhatsApp</button>
+      <button class="btn-checkout-wa" onclick="openOrderModal()"><i class="fa-brands fa-whatsapp"></i> Pedir por WhatsApp</button>
     </div>
   </div>
 
@@ -576,25 +576,18 @@
   <!-- MODAL PEDIDO -->
   <div class="modal-backdrop" id="orderModal">
     <div class="modal-content">
-      <h2 style="font-family: var(--font-title); font-size: 2rem; color: var(--brand-orange);">DATOS PARA EL PEDIDO</h2>
+      <h2 style="font-family: var(--font-title); font-size: 2rem; color: var(--brand-orange);">DATOS PARA EL ENVÍO</h2>
       <div class="form-group">
         <label>Nombre y Apellido</label>
         <input type="text" id="custName" placeholder="Ej: Juan Pérez">
       </div>
       <div class="form-group">
-        <label>Modalidad</label>
-        <select id="custDelivery">
-          <option value="Delivery / Envío a domicilio">Delivery / Envío a domicilio</option>
-          <option value="Retiro en local">Retiro por el local (Posadas 896)</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label>Dirección (si es delivery)</label>
+        <label>Dirección de Envío (Calle y Número)</label>
         <input type="text" id="custAddress" placeholder="Ej: Calle 14 de Julio 500">
       </div>
       <div class="form-group">
         <label>Aclaraciones / Observaciones</label>
-        <textarea id="custNotes" rows="2" placeholder="Ej: Que estén bien calientitos, timbre roto, etc."></textarea>
+        <textarea id="custNotes" rows="2" placeholder="Ej: Timbre roto, entre calles, etc."></textarea>
       </div>
       <div class="modal-actions">
         <button class="btn-cancel" onclick="closeOrderModal()">Volver</button>
@@ -605,12 +598,11 @@
 
   <footer>
     <p>&copy; 2026 <strong>Churros Coco</strong> — Concepción del Uruguay.</p>
-    <p>Martes a Domingo de 13:00 a 20:30 hs.</p>
+    <p>Pedidos por WhatsApp únicamente para Delivery.</p>
   </footer>
 
   <script>
-    // CONFIGURACIÓN Y MENÚ OFICIAL CHURROS COCO
-    const WHATSAPP_NUMBER = "5493442400000"; // Reemplazar con el WhatsApp real si lo tenés
+    const WHATSAPP_NUMBER = "5493442400000";
 
     const flavorOptions = {
       rellenos: ["Dulce de leche clásico", "Dulce de leche al ron", "Membrillo", "Pastelera", "Batata"],
@@ -932,15 +924,19 @@
       document.getElementById('orderModal').style.display = 'none';
     }
 
-    /* FORMATO OPCIÓN A A WHATSAPP */
+    /* FORMATO A WHATSAPP (SOLO DELIVERY) */
     function sendWhatsAppOrder() {
       const name = document.getElementById('custName').value.trim();
-      const delivery = document.getElementById('custDelivery').value;
       const address = document.getElementById('custAddress').value.trim();
       const notes = document.getElementById('custNotes').value.trim();
 
       if (!name) {
         alert("Por favor decinos tu nombre para el pedido.");
+        return;
+      }
+
+      if (!address) {
+        alert("Por favor decinos tu dirección de envío.");
         return;
       }
 
@@ -954,13 +950,12 @@
         orderDetails += `• ${item.qty}x ${item.name}${detailsStr} — $${itemTotal.toLocaleString('es-AR')}\n`;
       }
 
-      let message = `¡Hola *Churros Coco*! 🥖😋\nQuisiera realizar el siguiente pedido desde la web:\n\n`;
+      let message = `¡Hola *Churros Coco*! 🥖😋\nQuisiera realizar el siguiente pedido para *DELIVERY*:\n\n`;
       message += `🛒 *DETALLE DEL PEDIDO:*\n${orderDetails}\n`;
       message += `💰 *TOTAL ESTIMADO:* $${totalPrice.toLocaleString('es-AR')}\n\n`;
-      message += `👤 *DATOS PARA EL PEDIDO:*\n`;
+      message += `🛵 *DATOS PARA EL ENVÍO:*\n`;
       message += `• *Nombre:* ${name}\n`;
-      message += `• *Modalidad:* ${delivery}\n`;
-      if (address) message += `• *Dirección:* ${address}\n`;
+      message += `• *Dirección de envío:* ${address}\n`;
       if (notes) message += `• *Aclaraciones:* ${notes}\n`;
       message += `\n¡Quedo a la espera de la confirmación! Muchas gracias.`;
 
